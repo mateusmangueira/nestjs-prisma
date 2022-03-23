@@ -1,0 +1,37 @@
+//@@map("nome da tabela") serve para criar o nome da tabela no BD personalizado, sem isso criaria no nome do Model
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id         Int      @id @default(autoincrement())
+  name       String
+  email      String   @unique
+  password   String
+  created_at DateTime @default(now())
+
+  @@map("users")
+}
+
+model Product {
+  id         Int      @id @default(autoincrement())
+  name       String
+  bar_code   String   @unique
+  price      Decimal
+  created_at DateTime @default(now())
+
+  @@map("products")
+}
+
+model Category {
+  id   Int    @id @default(autoincrement())
+  name String
+
+  @@map("categories")
+}
